@@ -1,6 +1,7 @@
 package br.com.ifpe.oxefood.modelo.cliente;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,14 @@ public class ClienteService {
        cliente.setDataCriacao(LocalDate.now());
        return repository.save(cliente);
    }
+   public List<Cliente> listarTodos() {
+  
+    return repository.findAll();
+}
+
+    public Cliente obterPorID(Long id) {
+
+    return repository.findById(id).get();
+}
 
 }
