@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import jakarta.transaction.Transactional;
 
 @Service
@@ -46,4 +47,12 @@ public class ProdutoService {
       repository.save(produto);
    }
 
+    @Transactional
+   public void delete(Long id){
+    Produto produto = repository.findById(id).get();
+    produto.setHabilitado(Boolean.FALSE);
+    produto.setVersao(produto.getVersao()+1);
+
+    repository.save(produto);
+  }
 }
