@@ -19,7 +19,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Produto extends EntidadeAuditavel {
    
    @Column
