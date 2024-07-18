@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ifpe.oxefood.modelo.CategoriaProduto.CategoriaProdutoService;
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import br.com.ifpe.oxefood.modelo.produto.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/produto")
@@ -27,15 +29,22 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
+    @Autowired
+    private CategoriaProdutoService categoriaProdutoService;
+
+
      @Operation(
        summary = "Serviço responsável por salvar um produto no sistema.",
        description = "Endpoint responsável por inserir um produto no sistema."
    )
     @PostMapping
-    public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
+    public ResponseEntity<Produto> save(@RequestBody @Valid ProdutoRequest request) {
 
-        Produto produto = produtoService.save(request.build());
-        return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+       Produto produtoNovo = request.build();
+       produtoNovo.setCategoria(categoriaProdutoService.obterPorId(request.getIdCategoria()));
+       Produto produto = produtoService.save(produtoNovo);
+       return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+
     }
 
     @Operation(
@@ -62,10 +71,14 @@ public class ProdutoController {
     )
     @PutMapping("/{id}")
     public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
-
-        produtoService.update(id, request.build());
+ 
+        Produto produto = request.build();
+        produto.setCategoria(categoriaProdutoService.obterPorId(request.getIdCategoria()));
+        produtoService.update(id, produto);
+       
         return ResponseEntity.ok().build();
     }
+ 
 
     @Operation(
         summary = "Serviço responsável por deletar um produto no sistema.",
