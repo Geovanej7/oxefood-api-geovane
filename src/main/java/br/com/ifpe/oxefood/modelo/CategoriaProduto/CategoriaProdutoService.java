@@ -39,7 +39,7 @@ public class CategoriaProdutoService {
 
         CategoriaProduto categoriaProduto = repository.findById(id).get();
         categoriaProduto.setDescricao(categoriaProdutoAlterado.getDescricao());
-        categoriaProduto.setVersao(categoriaProdutoAlterado.getVersao() +1);
+        categoriaProduto.setVersao(categoriaProduto.getVersao() +1);
 
         repository.save(categoriaProduto);
     }
