@@ -32,8 +32,8 @@ public class FabricanteController {
     private FabricanteService fabricanteService;
 
      @Operation(
-       summary = "Serviço responsável por salvar um fabricante no sistema.",
-       description = "Endpoint responsável por listar um cliente no sistema pelo seu id."
+       summary = "Serviço para salvar um fabricante.",
+       description = "Endpoint responsável por salvar um cliente no sistema."
    )
     @PostMapping
     public ResponseEntity<Fabricante> save(@RequestBody FabricanteRequest request){
@@ -41,15 +41,15 @@ public class FabricanteController {
         return new ResponseEntity<Fabricante>(fabricante,HttpStatus.CREATED);
     }    
     @Operation(
-        summary = "Serviço responsável por listar todos os fabricantes no sistema.",
-        description = "Endpoint responsável por inserir um fabricante no sistema."
+        summary = "Serviço para listar todos os fabricantes.",
+        description = "Endpoint responsável por listar todos fabricantes no sistema."
     )
     @GetMapping
     public List<Fabricante> listarTodos() {
         return fabricanteService.listarTodos();
     }
     @Operation(
-       summary = "Serviço responsável por listar um fabricante pelo seu id no sistema.",
+       summary = "Serviço para listar um fabricante pelo seu id.",
        description = "Endpoint responsável por listar um fabricante no sistema pelo seu id."
    )
     @GetMapping("/{id}")
@@ -57,7 +57,7 @@ public class FabricanteController {
         return fabricanteService.obterPorID(id);
     }
     @Operation(
-        summary = "Serviço responsável por atualizar um fabricante no sistema.",
+        summary = "Serviço para atualizar um fabricante.",
         description = "Endpoint responsável por atualizar um fabricante no sistema."
     )
     @PutMapping("/{id}")
@@ -67,7 +67,7 @@ public class FabricanteController {
         return ResponseEntity.ok().build();
     }
     @Operation(
-        summary = "Serviço responsável por deletar um fabricante no sistema.",
+        summary = "Serviço para deletar um fabricante.",
         description = "Endpoint responsável por deletar um fabricante no sistema pelo seu id."
     )
     @DeleteMapping("/{id}")

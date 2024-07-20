@@ -34,7 +34,7 @@ public class ProdutoController {
 
 
      @Operation(
-       summary = "Serviço responsável por salvar um produto no sistema.",
+       summary = "Serviço para salvar um produto.",
        description = "Endpoint responsável por inserir um produto no sistema."
    )
     @PostMapping
@@ -48,8 +48,8 @@ public class ProdutoController {
     }
 
     @Operation(
-        summary = "Serviço responsável por listar todos os produtos no sistema.",
-        description = "Endpoint responsável por inserir um produto no sistema."
+        summary = "Serviço para listar todos os produtos.",
+        description = "Endpoint responsável por listar todos os produto no sistema."
     )
     @GetMapping
     public List<Produto> listarTodos() {
@@ -57,7 +57,7 @@ public class ProdutoController {
     }
 
     @Operation(
-       summary = "Serviço responsável por listar um produto pelo seu id no sistema.",
+       summary = "Serviço para listar um produto pelo seu id.",
        description = "Endpoint responsável por listar um produto no sistema pelo seu id."
    )
     @GetMapping("/{id}")
@@ -66,7 +66,7 @@ public class ProdutoController {
     }
 
     @Operation(
-        summary = "Serviço responsável por atualizar um produto no sistema.",
+        summary = "Serviço para atualizar um produto.",
         description = "Endpoint responsável por atualizar um produto no sistema."
     )
     @PutMapping("/{id}")

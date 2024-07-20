@@ -32,7 +32,7 @@ public class FornecedorController {
     private FornecedorService fornecedorService;
 
     @Operation(
-       summary = "Serviço responsável por salvar um fornecedor no sistema.",
+       summary = "Serviço para salvar um fornecedor.",
        description = "Endpoint responsável por inserir um fornecedor no sistema."
    )
     @PostMapping
@@ -42,15 +42,15 @@ public class FornecedorController {
         return new ResponseEntity<Fornecedor>(fornecedor, HttpStatus.CREATED);
     }
     @Operation(
-       summary = "Serviço responsável por listar todos os fornecedores no sistema.",
-       description = "Endpoint responsável por inserir um fornecedor no sistema."
+       summary = "Serviço para listar todos os fornecedores.",
+       description = "Endpoint responsável por listar todos os fornecedor no sistema."
    )
     @GetMapping  
     public List<Fornecedor> listarTodos(){
         return fornecedorService.listarTodos();
     }
     @Operation(
-       summary = "Serviço responsável por listar um fornecedor pelo seu id no sistema.",
+       summary = "Serviço para listar um fornecedor pelo seu id.",
        description = "Endpoint responsável por listar um fornecedor no sistema pelo seu id."
    )
     @GetMapping("/{id}")
@@ -58,7 +58,7 @@ public class FornecedorController {
         return fornecedorService.obterPorID(id);
     }
     @Operation(
-        summary = "Serviço responsável por atualizar um fornecedor no sistema.",
+        summary = "Serviço para atualizar um fornecedor.",
         description = "Endpoint responsável por atualizar um fornecedor no sistema."
     )
      @PutMapping("/{id}")
@@ -68,7 +68,7 @@ public class FornecedorController {
         return ResponseEntity.ok().build();
     }
     @Operation(
-        summary = "Serviço responsável por deletar um fornecedor no sistema.",
+        summary = "Serviço para deletar um fornecedor.",
         description = "Endpoint responsável por deletar um fornecedor no sistema pelo seu id."
     )
      @DeleteMapping("/{id}")
