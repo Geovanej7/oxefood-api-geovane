@@ -48,12 +48,38 @@ public class ProdutoService {
       repository.save(produto);
    }
 
-    @Transactional
-   public void delete(Long id){
-    Produto produto = repository.findById(id).get();
-    produto.setHabilitado(Boolean.FALSE);
-    produto.setVersao(produto.getVersao()+1);
+   @Transactional
+   public void delete(Long id) {
+      Produto produto = repository.findById(id).get();
+      produto.setHabilitado(Boolean.FALSE);
+      produto.setVersao(produto.getVersao() + 1);
 
-    repository.save(produto);
-  }
+      repository.save(produto);
+   }
+
+   public List<Produto> filtrar(String codigo, String titulo, Long idCategoria) {
+
+      List<Produto> listaProdutos = repository.findAll();
+
+      if ((codigo != null && !"".equals(codigo)) &&
+            (titulo == null || "".equals(titulo)) &&
+            (idCategoria == null)) {
+         listaProdutos = repository.findByCodigo(codigo);
+      } else if ((codigo == null || "".equals(codigo)) &&
+            (titulo != null && !"".equals(titulo)) &&
+            (idCategoria == null)) {
+         listaProdutos = repository.findByTituloContainingIgnoreCaseOrderByTituloAsc(titulo);
+      } else if ((codigo == null || "".equals(codigo)) &&
+            (titulo == null || "".equals(titulo)) &&
+            (idCategoria != null)) {
+         listaProdutos = repository.consultarPorCategoria(idCategoria);
+      } else if ((codigo == null || "".equals(codigo)) &&
+            (titulo != null && !"".equals(titulo)) &&
+            (idCategoria != null)) {
+         listaProdutos = repository.consultarPorTituloECategoria(titulo, idCategoria);
+      }
+
+      return listaProdutos;
+   }
+
 }

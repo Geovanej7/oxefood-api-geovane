@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import jakarta.transaction.Transactional;
 
 @Service
@@ -62,7 +61,8 @@ public class ClienteService {
 
     @Transactional
     public EnderecoCliente adicionarEnderecoCliente(Long clienteId, EnderecoCliente endereco) {
-        //alteração na forma de buscar por id (Cliente cliente = this.findById(clienteId);)
+        // alteração na forma de buscar por id (Cliente cliente =
+        // this.findById(clienteId);)
         Cliente cliente = repository.findById(clienteId).get();
 
         // Primeiro salva o EnderecoCliente:
@@ -113,6 +113,25 @@ public class ClienteService {
         cliente.getEnderecos().remove(endereco);
         cliente.setVersao(cliente.getVersao() + 1);
         repository.save(cliente);
+    }
+
+    @Transactional
+    public List<Cliente> filtrar(String nome, String cpf) {
+
+        List<Cliente> listaProdutos = repository.findAll();
+
+        if ((nome != null && !"".equals(nome)) &&
+                (cpf == null || "".equals(cpf))) {
+            listaProdutos = repository.findByNome(nome);
+        } else if ((nome == null || "".equals(nome)) &&
+                (cpf != null && !"".equals(cpf))) {
+            listaProdutos = repository.findByCpf(cpf);
+        } else if ((nome != null || !"".equals(nome)) &&
+                (cpf != null || !"".equals(cpf))) {
+            listaProdutos = repository.consultarNomeeCpf(nome, cpf);
+        }
+
+        return listaProdutos;
     }
 
 }
