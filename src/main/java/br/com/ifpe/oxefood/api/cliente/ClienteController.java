@@ -91,7 +91,7 @@ public class ClienteController {
         clienteService.removerEnderecoCliente(enderecoId);
         return ResponseEntity.noContent().build();
     }
-
+    @Operation(summary = "Serviço para filtrar um cliente.", description = "Endpoint responsável por filtrar um cliente no sistema.")
     @PostMapping("/filtrar")
     public List<Cliente> filtrar(
             @RequestParam(value = "nome", required = false) String nome,

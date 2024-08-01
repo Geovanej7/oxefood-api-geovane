@@ -118,20 +118,20 @@ public class ClienteService {
     @Transactional
     public List<Cliente> filtrar(String nome, String cpf) {
 
-        List<Cliente> listaProdutos = repository.findAll();
+        List<Cliente> listaClientes = repository.findAll();
 
         if ((nome != null && !"".equals(nome)) &&
                 (cpf == null || "".equals(cpf))) {
-            listaProdutos = repository.findByNome(nome);
+                    listaClientes = repository.findByNome(nome);
         } else if ((nome == null || "".equals(nome)) &&
                 (cpf != null && !"".equals(cpf))) {
-            listaProdutos = repository.findByCpf(cpf);
-        } else if ((nome != null || !"".equals(nome)) &&
-                (cpf != null || !"".equals(cpf))) {
-            listaProdutos = repository.consultarNomeeCpf(nome, cpf);
+                    listaClientes = repository.findByCpf(cpf);
+        } else if ((nome != null && !"".equals(nome)) &&
+                (cpf != null && !"".equals(cpf))) {
+                    listaClientes = repository.consultarNomeeCpf(nome, cpf);
         }
-
-        return listaProdutos;
+         return listaClientes;
+        
     }
 
 }
