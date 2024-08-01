@@ -32,7 +32,7 @@ public class ClienteController {
 
     @Operation(summary = "Serviço para salvar um cliente no sistema.", description = "Endpoint responsável por inserir um cliente no sistema.")
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody ClienteRequest request) {
+    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
 
         Cliente cliente = clienteService.save(request.build());
         return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
@@ -91,6 +91,7 @@ public class ClienteController {
         clienteService.removerEnderecoCliente(enderecoId);
         return ResponseEntity.noContent().build();
     }
+
     @Operation(summary = "Serviço para filtrar um cliente.", description = "Endpoint responsável por filtrar um cliente no sistema.")
     @PostMapping("/filtrar")
     public List<Cliente> filtrar(

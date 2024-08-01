@@ -58,7 +58,7 @@ public class ProdutoController {
 
     @Operation(summary = "Serviço para atualizar um produto.", description = "Endpoint responsável por atualizar um produto no sistema.")
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
+    public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody @Valid ProdutoRequest request) {
 
         Produto produto = request.build();
         produto.setCategoria(categoriaProdutoService.obterPorId(request.getIdCategoria()));
