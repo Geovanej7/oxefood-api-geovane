@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import br.com.ifpe.oxefood.util.exception.EntregadorException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -16,10 +16,14 @@ public class EntregadorService {
     @Transactional
     public Entregador save(Entregador entregador) {
 
+      if(entregador.getCpf() == null || entregador.getCpf().isEmpty()){
+        throw new EntregadorException(EntregadorException.MSG_CPF_NULO);
+      }else{
         entregador.setHabilitado(Boolean.TRUE);
         entregador.setVersao(1L);
         entregador.setDataCriacao(LocalDate.now());
         return repository.save(entregador);
+      }  
     }
 
     public List<Entregador> listarTodos() {

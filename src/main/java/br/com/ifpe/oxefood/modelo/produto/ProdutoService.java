@@ -21,14 +21,15 @@ public class ProdutoService {
          throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
       }
 
-      if (produto.getTitulo() == null || produto.getTitulo().isEmpty()) {
+      else if(produto.getTitulo() == null || produto.getTitulo().isEmpty()) {
          throw new ProdutoException(ProdutoException.MSG_TITULO_INEXISTENTE_PRODUTO);
       }
-
-      produto.setHabilitado(Boolean.TRUE);
-      produto.setVersao(1L);
-      produto.setDataCriacao(LocalDate.now());
-      return repository.save(produto);
+      else{ 
+         produto.setHabilitado(Boolean.TRUE);
+         produto.setVersao(1L);
+         produto.setDataCriacao(LocalDate.now());
+         return repository.save(produto);
+      }
    }
 
    public List<Produto> listarTodos() {

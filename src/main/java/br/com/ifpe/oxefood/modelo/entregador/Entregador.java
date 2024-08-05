@@ -26,16 +26,16 @@ import org.hibernate.annotations.SQLRestriction;
 @NoArgsConstructor
 
 public class Entregador extends EntidadeAuditavel {
-    @Column
+    @Column(nullable = false, length = 30)
     private String nome;
 
-    @Column
+    @Column(nullable = false)
     private String cpf;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate dataNascimento;
 
-    @Column
+    @Column(nullable = false)
     private String foneCelular;
 
     @Column
@@ -44,31 +44,31 @@ public class Entregador extends EntidadeAuditavel {
     @Column
     private int qtdEntregasRealizadas;
 
-    @Column
+    @Column(nullable = false)
     private Double valorFrete;
 
-    @Column
+    @Column(nullable = false, length = 30)
     private String enderecoRua;
 
-    @Column
+    @Column(nullable = false)
     private String enderecoNumero;
 
-    @Column
+    @Column(nullable = false, length = 30)
     private String enderecoBairro;
 
-    @Column
+    @Column(nullable = false, length = 30)
     private String enderecoCidade;
 
-    @Column
+    @Column(nullable = false)
     private String enderecoCep;
 
-    @Column
+    @Column(nullable = false, length = 5)
     private String enderecoUf;
 
-    @Column
+    @Column(nullable = false, length = 30)
     private String enderecoCompleto;
 
-    @Column
+    @Column(nullable = false)
     private Boolean ativo; 
 
 }

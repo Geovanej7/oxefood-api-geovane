@@ -1,9 +1,8 @@
 package br.com.ifpe.oxefood.api.produto;
 
-import org.hibernate.validator.constraints.Length;
-
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,25 +16,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProdutoRequest {
 
-  @NotBlank(message = "O id de categoria é de preenchimento obrigatório")
+  @NotNull
   private Long idCategoria;
 
-  @NotBlank(message = "O codigo é de preenchimento obrigatório")
+  @NotBlank(message= "O codigo é de preenchimento obrigatório")
   private String codigo;
 
-  @NotBlank(message = "O titulo é de preenchimento obrigatório")
+  @NotBlank(message= "O titulo é de preenchimento obrigatório")
   private String titulo;
 
-  @NotNull(message = "A descrição não pode ser nula")
+  @NotBlank(message= "A descrição é de preenchimento obrigatório")
   private String descricao;
 
-  @NotBlank(message = "O valor é de preenchimento obrigatório")
+  @Min(value=10, message= "O valor minimo é 10 reais")
   private Double valorUnitario;
 
-  @Max(value = 30, message = "O valor de entrega mínimo é entre 1 e 30 minutos")
+  @Max(value= 30, message = "O valor de entrega mínimo é de 30 minutos")
   private Integer tempoEntregaMinimo;
 
-  @Length(min = 30, max = 100, message = "O valor de entrega maximo é entre 30 e 100 minutos")
+  
+  @Max(value= 100, message = "O valor de entrega máximo é de 100 minutos")
   private Integer tempoEntregaMaximo;
 
   public Produto build() {
