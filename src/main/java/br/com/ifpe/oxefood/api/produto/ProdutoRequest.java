@@ -28,7 +28,7 @@ public class ProdutoRequest {
   @NotBlank(message= "A descrição é de preenchimento obrigatório")
   private String descricao;
 
-  @Min(value=10, message= "O valor minimo é 10 reais")
+  @Min(value=100, message= "O valor minimo é 100 reais")
   private Double valorUnitario;
 
   @Max(value= 30, message = "O valor de entrega mínimo é de 30 minutos")

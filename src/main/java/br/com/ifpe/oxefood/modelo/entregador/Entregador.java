@@ -4,6 +4,7 @@ import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Entregador extends EntidadeAuditavel {
     private LocalDate dataNascimento;
 
     @Column(nullable = false)
+    @Pattern(regexp = "^81[0-9]{8}$", message = "O telefone deve começar com o prefixo 81.")
     private String foneCelular;
 
     @Column

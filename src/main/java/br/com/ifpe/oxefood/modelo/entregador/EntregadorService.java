@@ -18,12 +18,15 @@ public class EntregadorService {
 
       if(entregador.getCpf() == null || entregador.getCpf().isEmpty()){
         throw new EntregadorException(EntregadorException.MSG_CPF_NULO);
-      }else{
+      }
+      if(entregador.getFoneCelular()== null || !entregador.getFoneCelular().startsWith("81")){
+        throw new EntregadorException(EntregadorException.MSG_NUMERO_INVALIDO);
+      }
         entregador.setHabilitado(Boolean.TRUE);
         entregador.setVersao(1L);
         entregador.setDataCriacao(LocalDate.now());
         return repository.save(entregador);
-      }  
+     
     }
 
     public List<Entregador> listarTodos() {
