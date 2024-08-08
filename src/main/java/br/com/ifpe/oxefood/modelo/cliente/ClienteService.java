@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.util.exception.ClienteException;
 import br.com.ifpe.oxefood.util.exception.EntidadeNaoEncontradaException;
 import jakarta.transaction.Transactional;
@@ -20,19 +21,23 @@ public class ClienteService {
     @Autowired
     private EnderecoClienteRepository enderecoClienteRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Transactional
     public Cliente save(Cliente cliente) {
 
         String foneCelular = cliente.getFoneCelular().replaceAll("\\D", "");
 
-        if (cliente.getFoneCelular() == null || !foneCelular.startsWith("81")){
+        if (cliente.getFoneCelular() == null || !foneCelular.startsWith("81")) {
             throw new ClienteException(ClienteException.MSG_NUMERO_INVALIDO);
         }
+        usuarioService.save(cliente.getUsuario());
         cliente.setHabilitado(Boolean.TRUE);
         cliente.setVersao(1L);
         cliente.setDataCriacao(LocalDate.now());
         return repository.save(cliente);
-}
+    }
 
     public List<Cliente> listarTodos() {
 
