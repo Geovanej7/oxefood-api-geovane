@@ -15,11 +15,12 @@ public class EntregadorService {
 
     @Transactional
     public Entregador save(Entregador entregador) {
+      String foneCelular = entregador.getFoneCelular().replaceAll("\\D", "");
 
       if(entregador.getCpf() == null || entregador.getCpf().isEmpty()){
         throw new EntregadorException(EntregadorException.MSG_CPF_NULO);
       }
-      if(entregador.getFoneCelular()== null || !entregador.getFoneCelular().startsWith("81")){
+      if(entregador.getFoneCelular()== null || !foneCelular.startsWith("81")){
         throw new EntregadorException(EntregadorException.MSG_NUMERO_INVALIDO);
       }
         entregador.setHabilitado(Boolean.TRUE);

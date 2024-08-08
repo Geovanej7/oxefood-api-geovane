@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +39,6 @@ public class Cliente extends EntidadeAuditavel {
    private String cpf;
 
    @Column(nullable = false)
-   @Pattern(regexp = "^81[0-9]{8}$", message = "O telefone deve começar com o prefixo 81.")
    private String foneCelular;
 
    @Column

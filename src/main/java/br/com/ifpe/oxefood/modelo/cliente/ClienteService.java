@@ -23,7 +23,9 @@ public class ClienteService {
     @Transactional
     public Cliente save(Cliente cliente) {
 
-        if (cliente.getFoneCelular() == null || !cliente.getFoneCelular().startsWith("81")){
+        String foneCelular = cliente.getFoneCelular().replaceAll("\\D", "");
+
+        if (cliente.getFoneCelular() == null || !foneCelular.startsWith("81")){
             throw new ClienteException(ClienteException.MSG_NUMERO_INVALIDO);
         }
         cliente.setHabilitado(Boolean.TRUE);
