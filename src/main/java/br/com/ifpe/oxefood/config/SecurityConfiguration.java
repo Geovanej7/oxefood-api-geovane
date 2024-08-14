@@ -39,7 +39,7 @@ public class SecurityConfiguration {
         .authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/api/cliente").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/auth").permitAll()
-        .antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**")
+        .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**")
         .permitAll()
         .anyRequest()
         .authenticated()
@@ -54,16 +54,15 @@ public class SecurityConfiguration {
   }
 
   @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-
+CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-
-    configuration.setAllowedOrigins(List.of("http://localhost:8080"));
-    configuration.setAllowedMethods(List.of("GET", "POST"));
-    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+    configuration.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:8081")); // Permitir ambos os domínios
+    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Permitir todos os métodos necessários
+    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept")); // Permitir todos os cabeçalhos necessários
+    configuration.setExposedHeaders(List.of("Authorization")); // Expor cabeçalhos específicos, se necessário
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
-  }
+}
 }
