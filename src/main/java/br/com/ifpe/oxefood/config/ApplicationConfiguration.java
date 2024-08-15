@@ -15,41 +15,41 @@ import br.com.ifpe.oxefood.modelo.acesso.UsuarioRepository;
 @Configuration
 public class ApplicationConfiguration {
 
-  private final UsuarioRepository userRepository;
+    private final UsuarioRepository userRepository;
 
-  public ApplicationConfiguration(UsuarioRepository userRepository) {
+    public ApplicationConfiguration(UsuarioRepository userRepository) {
 
-    this.userRepository = userRepository;
-  }
+        this.userRepository = userRepository;
+    }
 
-  @Bean
-  UserDetailsService userDetailsService() {
+    @Bean
+    UserDetailsService userDetailsService() {
 
-    return username -> userRepository.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-  }
+        return username -> userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 
-  @Bean
-  BCryptPasswordEncoder passwordEncoder() {
+    @Bean
+    BCryptPasswordEncoder passwordEncoder() {
 
-    return new BCryptPasswordEncoder();
-  }
+        return new BCryptPasswordEncoder();
+    }
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 
-    return config.getAuthenticationManager();
-  }
+        return config.getAuthenticationManager();
+    }
 
-  @Bean
-  AuthenticationProvider authenticationProvider() {
+    @Bean
+    AuthenticationProvider authenticationProvider() {
 
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-    authProvider.setUserDetailsService(userDetailsService());
-    authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
 
-    return authProvider;
-  }
+        return authProvider;
+    }
 
 }

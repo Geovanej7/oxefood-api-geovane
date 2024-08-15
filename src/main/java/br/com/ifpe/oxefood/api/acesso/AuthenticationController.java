@@ -18,28 +18,28 @@ import br.com.ifpe.oxefood.modelo.seguranca.JwtService;
 @CrossOrigin
 public class AuthenticationController {
 
-  private final JwtService jwtService;
+    private final JwtService jwtService;
+    
+    private UsuarioService usuarioService;
 
-  private UsuarioService usuarioService;
+    public AuthenticationController(JwtService jwtService, UsuarioService usuarioService) {
 
-  public AuthenticationController(JwtService jwtService, UsuarioService usuarioService) {
+        this.jwtService = jwtService;
+        this.usuarioService = usuarioService;
+    }
 
-    this.jwtService = jwtService;
-    this.usuarioService = usuarioService;
-  }
+    @PostMapping
+    public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {
+    
+        Usuario authenticatedUser = usuarioService.authenticate(data.getUsername(), data.getPassword());
 
-  @PostMapping
-  public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {
+        String jwtToken = jwtService.generateToken(authenticatedUser);
 
-    Usuario authenticatedUser = usuarioService.authenticate(data.getUsername(), data.getPassword());
+        Map<Object, Object> loginResponse = new HashMap<>();
+        loginResponse.put("username", authenticatedUser.getUsername());
+        loginResponse.put("token", jwtToken);
+        loginResponse.put("tokenExpiresIn", jwtService.getExpirationTime());
 
-    String jwtToken = jwtService.generateToken(authenticatedUser);
-
-    Map<Object, Object> loginResponse = new HashMap<>();
-    loginResponse.put("username", authenticatedUser.getUsername());
-    loginResponse.put("token", jwtToken);
-    loginResponse.put("tokenExpiresIn", jwtService.getExpirationTime());
-
-    return loginResponse;
-  }
+        return loginResponse;
+    }    
 }
