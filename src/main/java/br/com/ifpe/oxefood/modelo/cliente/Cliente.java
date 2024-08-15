@@ -33,7 +33,7 @@ import org.hibernate.annotations.FetchMode;
 public class Cliente extends EntidadeAuditavel {
 
    @ManyToOne
-   @JoinColumn(nullable = false)
+   @JoinColumn(name = "usuario_id", nullable = false)
    private Usuario usuario;
 
    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
