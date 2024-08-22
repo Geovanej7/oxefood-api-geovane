@@ -50,3 +50,13 @@ public class ProdutoRequest {
         .build();
   }
 }
+ /* exmplo de requisição 
+ {
+   "idCategoria": 1,
+  "codigo": "PROD123",
+  "titulo": "Produto Exemplo",
+  "descricao": "Descrição detalhada do produto exemplo.",
+  "valorUnitario": 100.99,
+  "tempoEntregaMinimo": 30,
+  "tempoEntregaMaximo": 40
+} */

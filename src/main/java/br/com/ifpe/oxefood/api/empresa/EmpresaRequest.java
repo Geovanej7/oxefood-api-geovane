@@ -50,3 +50,16 @@ public class EmpresaRequest {
     }
 
 }
+
+/*{ exemplo de requisição
+  "email": "usuario@exemplo.com",
+  "password": "123",
+  "perfil": "EMPRESA_USER",
+  "site": "https://www.exemplo.com",
+  "cnpj": "12345678000190",
+  "inscricaoEstadual": "123.456.789.123",
+  "nomeEmpresarial": "Nome Empresarial Exemplo S.A.",
+  "nomeFantasia": "Nome Fantasia Exemplo",
+  "fone": "8191234-5678",
+  "foneAlternativo": "8198765-4321"
+} */

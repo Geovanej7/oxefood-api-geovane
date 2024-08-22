@@ -15,7 +15,7 @@ import br.com.ifpe.oxefood.modelo.empresa.EmpresaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/Empresa")
+@RequestMapping("/api/empresa")
 @CrossOrigin
 public class EmpresaController {
 
